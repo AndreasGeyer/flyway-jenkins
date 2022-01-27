@@ -15,16 +15,22 @@ pipeline {
                 echo "I am a master branch"
             }
         }
-        stage('Test Branch'){
+        stage('Apply Changes on Test'){
+            agent {
+                docker {
+                    image 'flyway/flyway'
+                    args '-v ./sql:/flyway/sql '
+                }
+            }
             when {branch "test"}
             steps {
-                echo "I am a Test branch"
+                sh "url=jdbc:postgresql://192.168.2.140:5431/postgres -schemas=flyway_test -user=dbuser -password=dbuser_password migrate"
             }
         }
         stage('Jenkins Branch'){
             when {branch "Jenkinsfile"}
             steps {
-                echo "I am a Test branch"
+                echo "I am a Jenkinsfile branch"
             }
         }
     }
