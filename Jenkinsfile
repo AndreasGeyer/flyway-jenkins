@@ -20,14 +20,7 @@ pipeline {
            
             steps {
                 sh """
-                    docker run --rm 
-                    -v //c/tmp/flyway:/flyway/sql 
-                    flyway/flyway 
-                    -url=jdbc:postgresql://192.168.2.140:5431/postgres 
-                    -schemas=flyway_test 
-                    -user=dbuser 
-                    -password=dbuser_password 
-                    migrate
+                    flyway info
                     """
             }
         }
