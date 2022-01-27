@@ -1,13 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Setup') {
             steps {
-                sh 'echo "Hello World"'
+                sh 'echo "Begin Pulling changes"'
                 sh '''
-                    echo "Multiline shell steps works too"
-                    ls -lah
+                    echo 'Pulling...' + env.BRANCH_NAME
                 '''
+            }
+            when {branch "main"}
+            steps {
+                echo "I am a master branch"
+            }
+            when {branch "test"}
+            steps {
+                echo "I am a Test branch"
             }
         }
     }
