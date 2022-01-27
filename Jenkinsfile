@@ -16,7 +16,7 @@ pipeline {
             }
         }
         stage('Apply Changes on Test'){
-            when {branch "test"}
+            when {branch "Jenkinsfile"}
            
             steps {
                 sh """
