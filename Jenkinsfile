@@ -21,5 +21,11 @@ pipeline {
                 echo "I am a Test branch"
             }
         }
+        stage('Jenkins Branch'){
+            when {branch "Jenkinsfile"}
+            steps {
+                echo "I am a Test branch"
+            }
+        }
     }
 }
